@@ -1,0 +1,22 @@
+import re
+
+f = open("raw.txt", "r", encoding='utf-8')
+txt = f.read()
+name_Company = re.search(r"(Филиал\s)(ТОО\s\w+\s)(\w+)", txt)
+BIN = re.search(r'(БИН\s)(\d.+)', txt)
+items = re.findall(r'\d+\.\n(.*)', txt)
+cnt = re.findall(r'(\d),\d{3}', txt)
+price = re.findall(r'x\s([\d\s].+),\d{2}', txt)
+total = re.findall(r'Стоимость\n(\d.+),\d{2}', txt)
+address = re.search(r'г\..+', txt)
+data_time = re.search(r'(Время:\s)(.+)', txt)
+print('Name of Company:', name_Company.group(2))
+print('BIN:', BIN.group(2))
+for i in range(len(items)):
+    print('Title:', items[i])
+    print('Count:', cnt[i])
+    print('Unit price:', price[i])
+    print('Total price:', total[i])
+print('Date:', data_time.group(2))
+print('Address:', address.group(0))
+f.close()

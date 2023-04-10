@@ -1,0 +1,1 @@
+exec(input('Print your code: '))
